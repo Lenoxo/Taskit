@@ -1,9 +1,9 @@
-function ToDoItem() {
+function ToDoItem(props) {
   return (
     <li>
       {/* Esto es un elemento de React, y todo el return está escrito con sintaxis JSX */}
       <span>V</span>
-      <p>Limpia la cebolla, y llora con la llorona</p>
+      <p>{props.text}</p>
       <span>X</span>
     </li>
   );
