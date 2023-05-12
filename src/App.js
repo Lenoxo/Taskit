@@ -1,10 +1,9 @@
-import './App.css';
-import { ToDoCounter } from './ToDoCounter';
-import { ToDoFilter } from './ToDoFilter';
-import { ToDoList } from './ToDoList';
-import { ToDoItem } from './ToDoItem'
-import { AddToDoButton } from "./AddToDoButton";
-import React from 'react';
+import { ToDoCounter } from './ToDoCounter/ToDoCounter';
+import { ToDoFilter } from './ToDoFilter/ToDoFilter';
+import { ToDoList } from './ToDoList/ToDoList';
+import { ToDoItem } from './ToDoItem/ToDoItem'
+import { AddToDoButton } from "./AddToDoButton/AddToDoButton";
+import './App.css'
 
 const defaultToDos = [
   { text: "Cortar Cebolla", completed: false},
@@ -18,7 +17,7 @@ function App() {
   // El return es el valor que retorna el componente
   return (
     // Esta es una forma de renderizar estos elementos, la otra es usar un div para contener todo
-    <React.Fragment>
+    <>
       {/* Aquí se está instertando un componente (ToDoItem) dentro de este otro componente (App) */}
       <ToDoCounter completed={16} total={25}/>
       <ToDoFilter />
@@ -34,7 +33,7 @@ function App() {
       </ToDoList>
 
       <AddToDoButton />
-    </React.Fragment>
+    </>
   );
 }
 

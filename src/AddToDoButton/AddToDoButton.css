@@ -1,0 +1,14 @@
+button {
+    position: fixed;
+    left: 50%;
+    top: 92%;
+    border-radius: 50%;
+    border: none;
+    width: 40px;
+    height: 40px;
+    background-color: coral;
+}
+button:hover {
+    background-color: rgb(250, 163, 132);
+    cursor: pointer;
+}
