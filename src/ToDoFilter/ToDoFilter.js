@@ -2,7 +2,7 @@ import './ToDoFilter.css'
 
 function ToDoFilter() {
   return (
-    <input placeholder="Cortar Cebolla" />
+    <input placeholder="Cortar Cebolla" className='ToDoFilter'/>
   );
 }
 

@@ -1,10 +1,13 @@
-input {
+.ToDoFilter {
     border: none;
     border-radius: 10px;
     font-size: large;
     background-color: #363636;
+    color: var(--text-main-color);
 }
-
-input::placeholder {
+.ToDoFilter::placeholder {
     text-align: center;
+}
+.ToDoFilter:focus {
+    outline-color: var(--text-main-color);
 }

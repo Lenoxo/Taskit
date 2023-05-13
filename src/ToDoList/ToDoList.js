@@ -2,7 +2,7 @@ import './ToDoList.css'
 
 function ToDoList({ children }) {
   return (
-    <ul>{children}</ul>
+    <ul className='ToDoList'>{children}</ul>
   );
 }
 // Esta es otra forma de hacerlo con la propiedad props.children

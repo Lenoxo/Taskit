@@ -1,12 +1,11 @@
-h1 {
+.ToDoCounter-title {
     font-size: 24px;
-    text-align: center;
     margin: 0;
     padding: 48px;
 }
-span:nth-child(1) {
-    color: #7eb2ff;
+.ToDoCounter-title > span:nth-child(1) {
+    color: #64acff;
 }
-span:nth-child(2) {
+.ToDoCounter-title > span:nth-child(2) {
     color: #e5675f;
 }

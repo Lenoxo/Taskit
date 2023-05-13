@@ -1,4 +1,5 @@
-ul {
+.ToDoList {
     width: 340px;
     padding: 0; 
+    list-style: none;
 }

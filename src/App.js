@@ -6,10 +6,10 @@ import { AddToDoButton } from "./AddToDoButton/AddToDoButton";
 import './App.css'
 
 const defaultToDos = [
-  { text: "Cortar Cebolla", completed: false},
+  { text: "Cortar Cebolla", completed: true},
   { text: "Tomar el Curso de React.js", completed: false},
   { text: "Llorar con la llorona", completed: false},
-  { text: "EEEEEEEepa", completed: false},
+  { text: "EEEEEEEepa", completed: true},
   { text: "CHIIIII", completed: false},
 ]
 // El componente es la función como tal
