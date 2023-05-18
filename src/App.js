@@ -4,23 +4,32 @@ import { ToDoList } from './ToDoList/ToDoList';
 import { ToDoItem } from './ToDoItem/ToDoItem'
 import { AddToDoButton } from "./AddToDoButton/AddToDoButton";
 import './App.css'
+import React from 'react';
 
 const defaultToDos = [
   { text: "Cortar Cebolla", completed: true},
   { text: "Tomar el Curso de React.js", completed: false},
   { text: "Llorar con la llorona", completed: false},
   { text: "EEEEEEEepa", completed: true},
-  { text: "CHIIIII", completed: false},
+  { text: "CHIIIII", completed: true},
+  { text: "ñooooooo", completed: false},
 ]
-// El componente es la función como tal
 function App() {
+  const [ toDos, setToDos ] = React.useState(defaultToDos);
+  const [searchValue, setSearchValue] = React.useState('');
+  console.log('Los usuarios buscan todos de ' + searchValue);
+
+  const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
+  // Otra forma de hacer esto, es usando Boolean(toDo.completed)
+  const totalToDos = toDos.length;
+
   // El return es el valor que retorna el componente
   return (
     // Esta es una forma de renderizar estos elementos, la otra es usar un div para contener todo
     <>
       {/* Aquí se está instertando un componente (ToDoItem) dentro de este otro componente (App) */}
-      <ToDoCounter completed={16} total={25}/>
-      <ToDoFilter />
+      <ToDoCounter completed={completedToDos} total={totalToDos}/>
+      <ToDoFilter searchValue={searchValue} setSearchValue={setSearchValue}/>
 
       <ToDoList>
         {defaultToDos.map(todo => {
