@@ -31,15 +31,15 @@ function App() {
   });
 
   function toggleToDoState(index) {
-    const updatedToDos = [...toDos]; // Hacer una copia del arreglo toDos
+    const updatedToDos = [...toDos]; // Hacer una copia del array toDos
     updatedToDos[index].completed = !updatedToDos[index].completed; // Cambiar el valor booleano
-    setToDos(updatedToDos); // Actualizar el estado toDos con el arreglo modificado
+    setToDos(updatedToDos); // Actualizar el estado toDos con el array modificado
   }
   
   function deleteToDo(index) {
-    const updatedToDos = [...toDos]; // Hacer una copia del arreglo toDos
-    updatedToDos.splice(index, 1);
-    setToDos(updatedToDos);
+    const updatedToDos = [...toDos]; // Hacer una copia del array toDos
+    updatedToDos.splice(index, 1); // splice permite eliminar elementos de un array
+    setToDos(updatedToDos); // Actualiza el estado ToDos
   }
 
   // El return es el valor que retorna el componente
