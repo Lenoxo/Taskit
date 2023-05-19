@@ -1,9 +1,9 @@
 import { ToDoCounter } from './ToDoCounter/ToDoCounter';
 import { ToDoFilter } from './ToDoFilter/ToDoFilter';
 import { ToDoList } from './ToDoList/ToDoList';
-import { ToDoItem } from './ToDoItem/ToDoItem'
+import { ToDoItem } from './ToDoItem/ToDoItem';
 import { AddToDoButton } from "./AddToDoButton/AddToDoButton";
-import './App.css'
+import './App.css';
 import React from 'react';
 
 const defaultToDos = [
@@ -22,6 +22,13 @@ function App() {
   const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
   // Otra forma de hacer esto, es usando Boolean(toDo.completed)
   const totalToDos = toDos.length;
+  
+  const filteredToDos = toDos.filter((toDo) => {
+    const toDoText = toDo.text.toLowerCase();
+    const toDoFilteredText = searchValue.toLowerCase();
+
+    return toDoText.includes(toDoFilteredText);
+  });
 
   // El return es el valor que retorna el componente
   return (
@@ -32,7 +39,7 @@ function App() {
       <ToDoFilter searchValue={searchValue} setSearchValue={setSearchValue}/>
 
       <ToDoList>
-        {defaultToDos.map(todo => {
+        {filteredToDos.map(todo => {
           return <ToDoItem
             // A la hora de trabajar con arrays, es necesario que cada elemento tenga un valor único, y tiene que guardarse con el atributo key 
             key={todo.text} 
