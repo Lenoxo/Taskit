@@ -30,6 +30,18 @@ function App() {
     return toDoText.includes(toDoFilteredText);
   });
 
+  function toggleToDoState(index) {
+    const updatedToDos = [...toDos]; // Hacer una copia del arreglo toDos
+    updatedToDos[index].completed = !updatedToDos[index].completed; // Cambiar el valor booleano
+    setToDos(updatedToDos); // Actualizar el estado toDos con el arreglo modificado
+  }
+  
+  function deleteToDo(index) {
+    const updatedToDos = [...toDos]; // Hacer una copia del arreglo toDos
+    updatedToDos.splice(index, 1);
+    setToDos(updatedToDos);
+  }
+
   // El return es el valor que retorna el componente
   return (
     // Esta es una forma de renderizar estos elementos, la otra es usar un div para contener todo
@@ -39,12 +51,21 @@ function App() {
       <ToDoFilter searchValue={searchValue} setSearchValue={setSearchValue}/>
 
       <ToDoList>
-        {filteredToDos.map(todo => {
+        {filteredToDos.map((todo) => {
           return <ToDoItem
-            // A la hora de trabajar con arrays, es necesario que cada elemento tenga un valor único, y tiene que guardarse con el atributo key 
-            key={todo.text} 
-            text={todo.text}
-            completed={todo.completed}/>
+          // A la hora de trabajar con arrays, es necesario que cada elemento tenga un valor único, y tiene que guardarse con el atributo key 
+          key={todo.text} 
+          text={todo.text}
+          toggleToDoState={() => {
+            const todoIndex = filteredToDos.indexOf(todo)
+            toggleToDoState(todoIndex)
+          }}
+          completed={todo.completed}
+          deleteToDo={() => {
+            const todoIndex = filteredToDos.indexOf(todo)
+            deleteToDo(todoIndex)
+          }}
+          />
         })}
       </ToDoList>
 
