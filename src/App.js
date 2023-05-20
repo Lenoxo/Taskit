@@ -34,38 +34,42 @@ function App() {
     const updatedToDos = [...toDos]; // Hacer una copia del array toDos
     updatedToDos[index].completed = !updatedToDos[index].completed; // Cambiar el valor booleano
     setToDos(updatedToDos); // Actualizar el estado toDos con el array modificado
-  }
+  };
   
   function deleteToDo(index) {
     const updatedToDos = [...toDos]; // Hacer una copia del array toDos
     updatedToDos.splice(index, 1); // splice permite eliminar elementos de un array
     setToDos(updatedToDos); // Actualiza el estado ToDos
-  }
+  };
 
   // El return es el valor que retorna el componente
   return (
     // Esta es una forma de renderizar estos elementos, la otra es usar un div para contener todo
     <>
       {/* Aquí se está instertando un componente (ToDoItem) dentro de este otro componente (App) */}
-      <ToDoCounter completed={completedToDos} total={totalToDos}/>
-      <ToDoFilter searchValue={searchValue} setSearchValue={setSearchValue}/>
-
+      {completedToDos === totalToDos && (
+        <h2>¡Felicidades, completaste todas tus ToDos!</h2>
+      )}
+      <ToDoCounter completed={completedToDos} total={totalToDos} />
+      <ToDoFilter searchValue={searchValue} setSearchValue={setSearchValue} />
       <ToDoList>
         {filteredToDos.map((todo) => {
-          return <ToDoItem
-          // A la hora de trabajar con arrays, es necesario que cada elemento tenga un valor único, y tiene que guardarse con el atributo key 
-          key={todo.text} 
-          text={todo.text}
-          toggleToDoState={() => {
-            const todoIndex = filteredToDos.indexOf(todo)
-            toggleToDoState(todoIndex)
-          }}
-          completed={todo.completed}
-          deleteToDo={() => {
-            const todoIndex = filteredToDos.indexOf(todo)
-            deleteToDo(todoIndex)
-          }}
-          />
+          return (
+            <ToDoItem
+              // A la hora de trabajar con arrays, es necesario que cada elemento tenga un valor único, y tiene que guardarse con el atributo key
+              key={todo.text}
+              text={todo.text}
+              toggleToDoState={() => {
+                const todoIndex = filteredToDos.indexOf(todo);
+                toggleToDoState(todoIndex);
+              }}
+              completed={todo.completed}
+              deleteToDo={() => {
+                const todoIndex = filteredToDos.indexOf(todo);
+                deleteToDo(todoIndex);
+              }}
+            />
+          );
         })}
       </ToDoList>
 
