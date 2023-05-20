@@ -16,9 +16,10 @@
 }
 .Icon-check {
     color: inherit;
+    font-size: 20px;
 }
 .Icon-check--active {
-    color: #57aaff;
+    color: greenyellow;
 }
 .ToDoItem-p {
     text-decoration: none;
@@ -28,6 +29,7 @@
 }
 .Icon-delete {
     color: inherit;
+    font-size: 20px;
 }
 .Icon-delete:hover{
     color: salmon;
