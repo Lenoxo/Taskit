@@ -18,18 +18,33 @@ import React from 'react';
 // localStorage.setItem('TODOS_V1', stringToDos);
 // localStorage.removeItem('TODOS_V1');
 
+// Esta función contiene toda la lógica relacionada al uso de localStorage
+function useLocalStorage(itemName, initialValue) {
+  const localStorageItems = localStorage.getItem(itemName);
+  let parsedItems;
+
+  if (localStorageItems) {
+    parsedItems = JSON.parse(localStorageItems);
+  } else {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItems = initialValue;
+  }
+
+  const [ items, setItem ] = React.useState(parsedItems);
+  const saveItems = (newItems) => {
+    setItem(newItems);
+    localStorage.setItem(itemName, JSON.stringify(newItems));
+  };
+
+  return [
+    items,
+    saveItems
+  ];
+};
 
 function App() {
-  const localStorageToDos = localStorage.getItem('TODOS_V1');
-  let parsedToDos;
-  if (localStorageToDos) {
-    parsedToDos = JSON.parse(localStorageToDos);
-  } else {
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    parsedToDos = [];
-  }
-  
-  const [ toDos, setToDos ] = React.useState(parsedToDos);
+  // Esto es la desestructuración del return del custom hook localStorage
+  const [ toDos, saveToDos ] = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = React.useState('');
   console.log('Los usuarios buscan todos de ' + searchValue);
 
@@ -44,10 +59,6 @@ function App() {
     return toDoText.includes(toDoFilteredText);
   });
 
-  const saveToDos = (newToDos) => {
-    setToDos(newToDos);
-    localStorage.setItem('TODOS_V1', JSON.stringify(newToDos))
-  }
 
   function toggleToDoState(index) {
     const updatedToDos = [...toDos]; // Hacer una copia del array toDos
