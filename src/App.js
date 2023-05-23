@@ -6,16 +6,30 @@ import { AddToDoButton } from "./AddToDoButton/AddToDoButton";
 import './App.css';
 import React from 'react';
 
-const defaultToDos = [
-  { text: "Cortar Cebolla", completed: true},
-  { text: "Tomar el Curso de React.js", completed: false},
-  { text: "Llorar con la llorona", completed: false},
-  { text: "EEEEEEEepa", completed: true},
-  { text: "CHIIIII", completed: true},
-  { text: "ñooooooo", completed: false},
-]
+// const defaultToDos = [
+//   { text: "Cortar Cebolla", completed: true},
+//   { text: "Tomar el Curso de React.js", completed: false},
+//   { text: "Llorar con la llorona", completed: false},
+//   { text: "EEEEEEEepa", completed: true},
+//   { text: "CHIIIII", completed: true},
+//   { text: "ñooooooo", completed: false},
+// ];
+// const stringToDos = JSON.stringify(defaultToDos);
+// localStorage.setItem('TODOS_V1', stringToDos);
+// localStorage.removeItem('TODOS_V1');
+
+
 function App() {
-  const [ toDos, setToDos ] = React.useState(defaultToDos);
+  const localStorageToDos = localStorage.getItem('TODOS_V1');
+  let parsedToDos;
+  if (localStorageToDos) {
+    parsedToDos = JSON.parse(localStorageToDos);
+  } else {
+    localStorage.setItem('TODOS_V1', JSON.stringify([]));
+    parsedToDos = [];
+  }
+  
+  const [ toDos, setToDos ] = React.useState(parsedToDos);
   const [searchValue, setSearchValue] = React.useState('');
   console.log('Los usuarios buscan todos de ' + searchValue);
 
@@ -30,16 +44,21 @@ function App() {
     return toDoText.includes(toDoFilteredText);
   });
 
+  const saveToDos = (newToDos) => {
+    setToDos(newToDos);
+    localStorage.setItem('TODOS_V1', JSON.stringify(newToDos))
+  }
+
   function toggleToDoState(index) {
     const updatedToDos = [...toDos]; // Hacer una copia del array toDos
     updatedToDos[index].completed = !updatedToDos[index].completed; // Cambiar el valor booleano
-    setToDos(updatedToDos); // Actualizar el estado toDos con el array modificado
+    saveToDos(updatedToDos); // Actualizar el estado toDos con el array modificado
   };
   
   function deleteToDo(index) {
     const updatedToDos = [...toDos]; // Hacer una copia del array toDos
     updatedToDos.splice(index, 1); // splice permite eliminar elementos de un array
-    setToDos(updatedToDos); // Actualiza el estado ToDos
+    saveToDos(updatedToDos); // Actualiza el estado ToDos
   };
 
   // El return es el valor que retorna el componente
