@@ -5,6 +5,7 @@ import { ToDoItem } from "../ToDoItem/ToDoItem";
 import { AddToDoButton } from "../AddToDoButton/AddToDoButton";
 import { ToDoLoading } from "../ToDoLoading/ToDoLoading";
 import { ToDoError } from "../ToDoError/ToDoError";
+import { EmptyToDos } from "../EmptyToDos/EmptyToDos";
 
 function AppUI({
     completedToDos,
@@ -21,7 +22,7 @@ function AppUI({
   // Esta es una forma de renderizar estos elementos, la otra es usar un div para contener todo
   <>
     {/* Aquí se está insertando un componente (ToDoItem) dentro de este otro componente (App) */}
-    {completedToDos === totalToDos && (
+    {!loading && completedToDos === totalToDos && (
       <h2>¡Felicidades, completaste todas tus ToDos!</h2>
     )}
     <ToDoCounter completed={completedToDos} total={totalToDos} />
@@ -29,7 +30,7 @@ function AppUI({
     <ToDoList>
       {loading && <ToDoLoading />}
       {error && <ToDoError />}
-      {(!loading && filteredToDos.length === 0) && <p>¡Crea tu primer ToDo!</p>}
+      {(!loading && filteredToDos.length === 0) && <EmptyToDos />}
 
       {filteredToDos.map((todo) => {
         return (

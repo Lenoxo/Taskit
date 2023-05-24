@@ -25,7 +25,7 @@ function useLocalStorage(itemName, initialValue) {
         setLoading(false);
         setError(true);
       }
-    }, 2000)
+    }, 1500)
   }, []); // Los corchetes aquí son de un array vacio, que indica que solo se ejecute una vez.
   // Si hubiera un estado que hiciera necesario actualizar el estado, puedes ponerlo dentro del array vacio.
   
