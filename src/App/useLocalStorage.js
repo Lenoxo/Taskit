@@ -5,29 +5,40 @@ function useLocalStorage(itemName, initialValue) {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(false);
   
+  // useEffect es un hook que permite ejecutar solo cuando es necesario este codigo.
   React.useEffect(() => {
-    const localStorageItems = localStorage.getItem(itemName);
-    let parsedItems;
-    
-    if (localStorageItems) {
-      parsedItems = JSON.parse(localStorageItems);
-    } else {
-      localStorage.setItem(itemName, JSON.stringify(initialValue));
-      parsedItems = initialValue;
-    }
-  }, [])
-
-
+    setTimeout(() => {
+      try {
+        const localStorageItems = localStorage.getItem(itemName);
+        let parsedItems;
+  
+        if (localStorageItems) {
+          parsedItems = JSON.parse(localStorageItems);
+          setItem(parsedItems)
+        } else {
+          localStorage.setItem(itemName, JSON.stringify(initialValue));
+          parsedItems = initialValue;
+        }
+        
+        setLoading(false);        
+      } catch(error) {
+        setLoading(false);
+        setError(true);
+      }
+    }, 2000)
+  }, []); // Los corchetes aquí son de un array vacio, que indica que solo se ejecute una vez.
+  // Si hubiera un estado que hiciera necesario actualizar el estado, puedes ponerlo dentro del array vacio.
+  
   const saveItems = (newItems) => {
     setItem(newItems);
     localStorage.setItem(itemName, JSON.stringify(newItems));
   };
 
   return {
-    items, 
+    items,
     saveItems,
     loading,
-    error
+    error,
   };
 }
 

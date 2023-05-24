@@ -3,6 +3,8 @@ import { ToDoFilter } from "../ToDoFilter/ToDoFilter";
 import { ToDoList } from "../ToDoList/ToDoList";
 import { ToDoItem } from "../ToDoItem/ToDoItem";
 import { AddToDoButton } from "../AddToDoButton/AddToDoButton";
+import { ToDoLoading } from "../ToDoLoading/ToDoLoading";
+import { ToDoError } from "../ToDoError/ToDoError";
 
 function AppUI({
     completedToDos,
@@ -25,8 +27,8 @@ function AppUI({
     <ToDoCounter completed={completedToDos} total={totalToDos} />
     <ToDoFilter searchValue={searchValue} setSearchValue={setSearchValue} />
     <ToDoList>
-      {loading && <p>Cargando ToDos...</p>}
-      {error && <p>¡Desespérate, hubo un error!</p>}
+      {loading && <ToDoLoading />}
+      {error && <ToDoError />}
       {(!loading && filteredToDos.length === 0) && <p>¡Crea tu primer ToDo!</p>}
 
       {filteredToDos.map((todo) => {
