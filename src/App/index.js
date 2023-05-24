@@ -1,10 +1,11 @@
-import { ToDoCounter } from './ToDoCounter/ToDoCounter';
-import { ToDoFilter } from './ToDoFilter/ToDoFilter';
-import { ToDoList } from './ToDoList/ToDoList';
-import { ToDoItem } from './ToDoItem/ToDoItem';
-import { AddToDoButton } from "./AddToDoButton/AddToDoButton";
-import './App.css';
-import React from 'react';
+import { ToDoCounter } from "../ToDoCounter";
+import { ToDoFilter } from "../ToDoFilter";
+import { ToDoList } from "../ToDoList";
+import { ToDoItem } from "../ToDoItem";
+import { AddToDoButton } from "../AddToDoButton";
+import { useLocalStorage } from "./useLocalStorage";
+import "./App.css";
+import React from "react";
 
 // const defaultToDos = [
 //   { text: "Cortar Cebolla", completed: true},
@@ -19,39 +20,17 @@ import React from 'react';
 // localStorage.removeItem('TODOS_V1');
 
 // Esta función contiene toda la lógica relacionada al uso de localStorage
-function useLocalStorage(itemName, initialValue) {
-  const localStorageItems = localStorage.getItem(itemName);
-  let parsedItems;
-
-  if (localStorageItems) {
-    parsedItems = JSON.parse(localStorageItems);
-  } else {
-    localStorage.setItem(itemName, JSON.stringify(initialValue));
-    parsedItems = initialValue;
-  }
-
-  const [ items, setItem ] = React.useState(parsedItems);
-  const saveItems = (newItems) => {
-    setItem(newItems);
-    localStorage.setItem(itemName, JSON.stringify(newItems));
-  };
-
-  return [
-    items,
-    saveItems
-  ];
-};
 
 function App() {
   // Esto es la desestructuración del return del custom hook localStorage
-  const [ toDos, saveToDos ] = useLocalStorage('TODOS_V1', []);
-  const [searchValue, setSearchValue] = React.useState('');
-  console.log('Los usuarios buscan todos de ' + searchValue);
+  const [toDos, saveToDos] = useLocalStorage("TODOS_V1", []);
+  const [searchValue, setSearchValue] = React.useState("");
+  console.log("Los usuarios buscan todos de " + searchValue);
 
-  const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
+  const completedToDos = toDos.filter((toDo) => !!toDo.completed).length;
   // Otra forma de hacer esto, es usando Boolean(toDo.completed)
   const totalToDos = toDos.length;
-  
+
   const filteredToDos = toDos.filter((toDo) => {
     const toDoText = toDo.text.toLowerCase();
     const toDoFilteredText = searchValue.toLowerCase();
@@ -59,18 +38,17 @@ function App() {
     return toDoText.includes(toDoFilteredText);
   });
 
-
   function toggleToDoState(index) {
     const updatedToDos = [...toDos]; // Hacer una copia del array toDos
     updatedToDos[index].completed = !updatedToDos[index].completed; // Cambiar el valor booleano
     saveToDos(updatedToDos); // Actualizar el estado toDos con el array modificado
-  };
-  
+  }
+
   function deleteToDo(index) {
     const updatedToDos = [...toDos]; // Hacer una copia del array toDos
     updatedToDos.splice(index, 1); // splice permite eliminar elementos de un array
     saveToDos(updatedToDos); // Actualiza el estado ToDos
-  };
+  }
 
   // El return es el valor que retorna el componente
   return (
@@ -107,6 +85,5 @@ function App() {
     </>
   );
 }
-
 
 export default App;
