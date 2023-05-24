@@ -19,27 +19,17 @@ import React from "react";
 
 function App() {
   // Esto es la desestructuración del return del custom hook localStorage
-  const [toDos, saveToDos] = useLocalStorage("TODOS_V1", []);
+  const {
+    items: toDos, 
+    saveItems: saveToDos,
+    loading,
+    error
+  } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = React.useState("");
 
   const completedToDos = toDos.filter((toDo) => !!toDo.completed).length;
   // Otra forma de hacer esto, es usando Boolean(toDo.completed)
   const totalToDos = toDos.length;
-
-  console.log('Log 1');
-  // React.useEffect(() => {
-  //   console.log('Loooooooooog 2')
-  // });
-
-  // React.useEffect(() => {
-  //   console.log('Loooooooooog 2')
-  // }, []);
-  // console.log('Log 3');
-
-  React.useEffect(() => {
-    console.log('Loooooooooog 2')
-  }, [totalToDos]);
-  console.log('Log 3');
 
   const filteredToDos = toDos.filter((toDo) => {
     const toDoText = toDo.text.toLowerCase();
@@ -70,6 +60,8 @@ function App() {
       filteredToDos={filteredToDos}
       toggleToDoState={toggleToDoState}
       deleteToDo={deleteToDo}
+      loading={loading}
+      error={error}
     />
   );
 };

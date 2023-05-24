@@ -11,7 +11,9 @@ function AppUI({
     setSearchValue,
     filteredToDos,
     toggleToDoState,
-    deleteToDo
+    deleteToDo,
+    loading,
+    error
 }) {
   return (
   // Esta es una forma de renderizar estos elementos, la otra es usar un div para contener todo
@@ -23,6 +25,10 @@ function AppUI({
     <ToDoCounter completed={completedToDos} total={totalToDos} />
     <ToDoFilter searchValue={searchValue} setSearchValue={setSearchValue} />
     <ToDoList>
+      {loading && <p>Cargando ToDos...</p>}
+      {error && <p>¡Desespérate, hubo un error!</p>}
+      {(!loading && filteredToDos.length === 0) && <p>¡Crea tu primer ToDo!</p>}
+
       {filteredToDos.map((todo) => {
         return (
           <ToDoItem
