@@ -1,10 +1,6 @@
-import { ToDoCounter } from "../ToDoCounter";
-import { ToDoFilter } from "../ToDoFilter";
-import { ToDoList } from "../ToDoList";
-import { ToDoItem } from "../ToDoItem";
-import { AddToDoButton } from "../AddToDoButton";
 import { useLocalStorage } from "./useLocalStorage";
 import "./App.css";
+import { AppUI } from "./AppUI";
 import React from "react";
 
 // const defaultToDos = [
@@ -25,11 +21,25 @@ function App() {
   // Esto es la desestructuración del return del custom hook localStorage
   const [toDos, saveToDos] = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = React.useState("");
-  console.log("Los usuarios buscan todos de " + searchValue);
 
   const completedToDos = toDos.filter((toDo) => !!toDo.completed).length;
   // Otra forma de hacer esto, es usando Boolean(toDo.completed)
   const totalToDos = toDos.length;
+
+  console.log('Log 1');
+  // React.useEffect(() => {
+  //   console.log('Loooooooooog 2')
+  // });
+
+  // React.useEffect(() => {
+  //   console.log('Loooooooooog 2')
+  // }, []);
+  // console.log('Log 3');
+
+  React.useEffect(() => {
+    console.log('Loooooooooog 2')
+  }, [totalToDos]);
+  console.log('Log 3');
 
   const filteredToDos = toDos.filter((toDo) => {
     const toDoText = toDo.text.toLowerCase();
@@ -52,38 +62,16 @@ function App() {
 
   // El return es el valor que retorna el componente
   return (
-    // Esta es una forma de renderizar estos elementos, la otra es usar un div para contener todo
-    <>
-      {/* Aquí se está instertando un componente (ToDoItem) dentro de este otro componente (App) */}
-      {completedToDos === totalToDos && (
-        <h2>¡Felicidades, completaste todas tus ToDos!</h2>
-      )}
-      <ToDoCounter completed={completedToDos} total={totalToDos} />
-      <ToDoFilter searchValue={searchValue} setSearchValue={setSearchValue} />
-      <ToDoList>
-        {filteredToDos.map((todo) => {
-          return (
-            <ToDoItem
-              // A la hora de trabajar con arrays, es necesario que cada elemento tenga un valor único, y tiene que guardarse con el atributo key
-              key={todo.text}
-              text={todo.text}
-              toggleToDoState={() => {
-                const todoIndex = filteredToDos.indexOf(todo);
-                toggleToDoState(todoIndex);
-              }}
-              completed={todo.completed}
-              deleteToDo={() => {
-                const todoIndex = filteredToDos.indexOf(todo);
-                deleteToDo(todoIndex);
-              }}
-            />
-          );
-        })}
-      </ToDoList>
-
-      <AddToDoButton />
-    </>
+    <AppUI
+      completedToDos={completedToDos}
+      totalToDos={totalToDos}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      filteredToDos={filteredToDos}
+      toggleToDoState={toggleToDoState}
+      deleteToDo={deleteToDo}
+    />
   );
-}
+};
 
 export default App;
