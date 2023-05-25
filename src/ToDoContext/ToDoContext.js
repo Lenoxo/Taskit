@@ -28,7 +28,7 @@ function ToDoProvider({ children }) {
   } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = React.useState("");
 
-  const [openModal, setOpenModal] = React.useState(true)
+  const [openModal, setOpenModal] = React.useState(false)
 
   const completedToDos = toDos.filter((toDo) => !!toDo.completed).length;
   // Otra forma de hacer esto, es usando Boolean(toDo.completed)
@@ -52,6 +52,7 @@ function ToDoProvider({ children }) {
     updatedToDos.splice(index, 1); // splice permite eliminar elementos de un array
     saveToDos(updatedToDos); // Actualiza el estado ToDos
   }
+
   return (
     <ToDoContext.Provider
       value={{

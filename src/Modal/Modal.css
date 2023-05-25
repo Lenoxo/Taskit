@@ -1,0 +1,11 @@
+.Modal {
+    position: absolute;
+    top: 25vh;
+    width: 250px;
+    height: 250px;
+    background-color: #262626;
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+    display: grid;
+    place-items: center;
+}

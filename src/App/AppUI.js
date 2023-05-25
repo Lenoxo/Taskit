@@ -48,7 +48,9 @@ function AppUI() {
       <AddToDoButton />
       {openModal && (
         <Modal>
+        <p>
         La funcionalidad de agregar ToDos.
+        </p>
       </Modal>
       )}
     </>
