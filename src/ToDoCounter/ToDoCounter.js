@@ -2,10 +2,18 @@ import './ToDoCounter.css';
 
 function ToDoCounter({ total, completed }) {
   return (
-    <h1 className='ToDoCounter-title'>
-      <span>{completed}</span> ToDos de <span>{total}</span> Completadas</h1>
+    <>
+      {/* {!loading && completed === total && (
+        <h2 className='ToDoCounter-title'>¡Felicidades, completaste todas tus ToDos!</h2>
+      )} */}
+      <h2 className='ToDoCounter-title'>
+        <span>{completed}</span> ToDos de <span>{total}</span> Completadas
+      </h2>
+    </>
   );
 }
+
+// Esta es otra forma de hacer este componente usando Estilos en Linea y Props
 // function ToDoCounter({ total, completed }) {
 //   return (
 //     <h1 style={{
