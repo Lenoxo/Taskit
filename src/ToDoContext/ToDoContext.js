@@ -28,6 +28,8 @@ function ToDoProvider({ children }) {
   } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = React.useState("");
 
+  const [openModal, setOpenModal] = React.useState(true)
+
   const completedToDos = toDos.filter((toDo) => !!toDo.completed).length;
   // Otra forma de hacer esto, es usando Boolean(toDo.completed)
   const totalToDos = toDos.length;
@@ -62,6 +64,8 @@ function ToDoProvider({ children }) {
         deleteToDo,
         loading,
         error,
+        openModal,
+        setOpenModal
       }}
     >
       {children}

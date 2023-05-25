@@ -6,11 +6,12 @@ import { AddToDoButton } from "../AddToDoButton/AddToDoButton";
 import { ToDoLoading } from "../ToDoLoading/ToDoLoading";
 import { ToDoError } from "../ToDoError/ToDoError";
 import { EmptyToDos } from "../EmptyToDos/EmptyToDos";
+import { Modal } from "../Modal/Modal";
 import { ToDoContext } from "../ToDoContext/ToDoContext";
 import React from "react";
 
 function AppUI() {
-  const { filteredToDos, toggleToDoState, deleteToDo, loading, error } =
+  const { filteredToDos, toggleToDoState, deleteToDo, loading, error, openModal, setOpenModal } =
     React.useContext(ToDoContext);
 
   return (
@@ -43,7 +44,13 @@ function AppUI() {
           );
         })}
       </ToDoList>
+
       <AddToDoButton />
+      {openModal && (
+        <Modal>
+        La funcionalidad de agregar ToDos.
+      </Modal>
+      )}
     </>
   );
 }
