@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import './Modal.css'
 
-const modalContainer = document.getElementById('modal')
+const modalContainer = document.getElementById('modal-background')
 
 function Modal({ children }) {
     return ReactDOM.createPortal(

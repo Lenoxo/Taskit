@@ -1,11 +1,10 @@
 .Modal {
-    position: absolute;
-    top: 25vh;
-    width: 250px;
-    height: 250px;
-    background-color: #262626;
-    border: 1px solid whitesmoke;
-    border-radius: 20px;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
     display: grid;
     place-items: center;
+    left: 0;
+    background-color: rgba(32,35,41,.8);
 }

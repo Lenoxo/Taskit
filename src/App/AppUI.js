@@ -9,6 +9,7 @@ import { EmptyToDos } from "../EmptyToDos/EmptyToDos";
 import { Modal } from "../Modal/Modal";
 import { ToDoContext } from "../ToDoContext/ToDoContext";
 import React from "react";
+import { ToDoForm } from "../ToDoForm/ToDoForm";
 
 function AppUI() {
   const { filteredToDos, toggleToDoState, deleteToDo, loading, error, openModal, setOpenModal } =
@@ -48,9 +49,7 @@ function AppUI() {
       <AddToDoButton />
       {openModal && (
         <Modal>
-        <p>
-        La funcionalidad de agregar ToDos.
-        </p>
+        <ToDoForm />
       </Modal>
       )}
     </>

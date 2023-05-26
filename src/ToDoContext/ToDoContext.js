@@ -28,7 +28,7 @@ function ToDoProvider({ children }) {
   } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = React.useState("");
 
-  const [openModal, setOpenModal] = React.useState(false)
+  const [openModal, setOpenModal] = React.useState(false);
 
   const completedToDos = toDos.filter((toDo) => !!toDo.completed).length;
   // Otra forma de hacer esto, es usando Boolean(toDo.completed)
@@ -53,6 +53,15 @@ function ToDoProvider({ children }) {
     saveToDos(updatedToDos); // Actualiza el estado ToDos
   }
 
+  function addToDo(text) {
+    const updatedToDos = [...toDos]; // Hacer una copia del array toDos
+    updatedToDos.push({
+      text,
+      completed: false,
+    });
+    saveToDos(updatedToDos);
+  }
+
   return (
     <ToDoContext.Provider
       value={{
@@ -66,7 +75,8 @@ function ToDoProvider({ children }) {
         loading,
         error,
         openModal,
-        setOpenModal
+        setOpenModal,
+        addToDo,
       }}
     >
       {children}
