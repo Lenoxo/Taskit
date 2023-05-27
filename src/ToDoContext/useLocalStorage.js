@@ -1,5 +1,7 @@
 import React from "react";
 
+// Esta función contiene toda la lógica relacionada al uso de localStorage
+
 function useLocalStorage(itemName, initialValue) {
   const [items, setItem] = React.useState(initialValue);
   const [loading, setLoading] = React.useState(true);

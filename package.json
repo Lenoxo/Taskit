@@ -1,9 +1,9 @@
 {
-  "name": "platzi-intro-react-base",
-  "version": "0.1.0",
+  "name": "taskit",
+  "version": "0.2.0",
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-icons": "^4.8.0",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
@@ -32,7 +32,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://lenoxo.github.io/todoproject",
+  "homepage": "https://lenoxo.github.io/Taskit",
   "devDependencies": {
     "gh-pages": "^5.0.0"
   }

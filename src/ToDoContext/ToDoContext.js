@@ -16,7 +16,7 @@ const ToDoContext = React.createContext();
 // localStorage.setItem('TODOS_V1', stringToDos);
 // localStorage.removeItem('TODOS_V1');
 
-// Esta función contiene toda la lógica relacionada al uso de localStorage
+// Aquí se concentra toda la lógica que se comparte entre varios componentes.
 
 function ToDoProvider({ children }) {
   // Esto es la desestructuración del return del custom hook localStorage

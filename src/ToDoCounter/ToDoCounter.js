@@ -6,6 +6,7 @@ function ToDoCounter() {
   const { completedToDos, totalToDos, loading } = React.useContext(ToDoContext)
   return (
     <>
+      <h1 className='Taskit-title'>Taskit</h1>
       {!loading && completedToDos === totalToDos && (
         <h2 className='ToDoCounter-title'>¡Felicidades, completaste todas tus ToDos!</h2>
       )}

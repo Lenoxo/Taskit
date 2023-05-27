@@ -27,18 +27,18 @@ function AppUI() {
         {!loading && filteredToDos.length === 0 && <EmptyToDos />}
 
         {filteredToDos.map((todo) => {
+          const todoIndex = filteredToDos.indexOf(todo);
           return (
             <ToDoItem
               // A la hora de trabajar con arrays, es necesario que cada elemento tenga un valor único, y tiene que guardarse con el atributo key
-              key={todo.text}
+              // En este caso, uso el indice de la tarea de filteredToDos.
+              key={todoIndex}
               text={todo.text}
               toggleToDoState={() => {
-                const todoIndex = filteredToDos.indexOf(todo);
                 toggleToDoState(todoIndex);
               }}
               completed={todo.completed}
               deleteToDo={() => {
-                const todoIndex = filteredToDos.indexOf(todo);
                 deleteToDo(todoIndex);
               }}
             />

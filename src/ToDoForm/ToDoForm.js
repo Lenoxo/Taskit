@@ -6,11 +6,9 @@ function ToDoForm() {
   const { setOpenModal, addToDo } = React.useContext(ToDoContext);
   const [newToDoValue, setNewToDoValue] = React.useState();
   const onSubmit = (event) => {
-    if (newToDoValue.length > 1) {
-        event.preventDefault();
-        addToDo(newToDoValue);
-        setOpenModal(false);
-    }
+    event.preventDefault();
+    addToDo(newToDoValue);
+    setOpenModal(false);
   };
   const onCancel = () => {
     setOpenModal(false);
@@ -25,17 +23,18 @@ function ToDoForm() {
         onChange={onChange}
         className="textarea"
         placeholder="Llorar con la llorona"
+        // Esto evita que se pueda añadir un ToDo vacio.
+        required
       />
       <div className="ToDoForm-buttonContainer">
-        <button className="ToDoForm-button ToDoForm-button--add ">
-          Añadir
-        </button>
         <button
-          type="submit"
           onClick={onCancel}
           className="ToDoForm-button ToDoForm-button--delete "
         >
           Cancelar
+        </button>
+        <button type="submit" className="ToDoForm-button ToDoForm-button--add ">
+          Añadir
         </button>
       </div>
     </form>

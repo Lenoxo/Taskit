@@ -1,7 +1,12 @@
-.ToDoCounter-title {
+.Taskit-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #64acff;
+}
+.ToDoCounter-title .Taskit-title {
     font-size: 24px;
     margin: 0;
-    padding: 48px;
+    padding: 20px;
 }
 .ToDoCounter-title > span:nth-child(1) {
     color: #64acff;
