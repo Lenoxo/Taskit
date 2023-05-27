@@ -2,7 +2,7 @@
 
 Taskit es una aplicación de gestión y organización de tareas construida con Create React App. Proporciona las siguientes características clave:
 
-- **Filtrado de tareas:** Filtra y visualiza fácilmente las tareas según diferentes criterios.
+- **Filtrado de tareas:** Filtra y visualiza fácilmente las tareas según su texto.
 - **Añadir tareas:** Agrega nuevas tareas a tu lista.
 - **Completar tareas:** Marca las tareas como completadas para hacer un seguimiento de tu progreso.
 - **Eliminar tareas:** Elimina las tareas que ya no necesitas.
@@ -23,7 +23,7 @@ Taskit es una aplicación de gestión y organización de tareas construida con C
 
 ### Características
 
-- **Filtrado de tareas:** Filtra y visualiza fácilmente las tareas según diferentes criterios como estado, prioridad o fecha de vencimiento.
+- **Filtrado de tareas:** Filtra y visualiza fácilmente las tareas según su texto.
 - **Añadir tareas:** Agrega rápidamente nuevas tareas a tu lista con un formulario de entrada sencillo.
 - **Completar tareas:** Marca las tareas como completadas para hacer un seguimiento de tu progreso.
 - **Eliminar tareas:** Elimina las tareas que ya no necesitas con un solo clic.
@@ -53,6 +53,4 @@ Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
 
 Lenoxo (Emanuel Padilla)
 
-No dudes en contactarme en [emanuehl159@gmail.com](mailto
-
-:emanuehl159@gmail.com) si tienes alguna pregunta, sugerencia o comentario.
+No dudes en contactarme en [emanuehl159@gmail.com](mailto:emanuehl159@gmail.com) si tienes alguna pregunta, sugerencia o comentario.

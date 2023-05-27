@@ -12,7 +12,7 @@ import React from "react";
 import { ToDoForm } from "../ToDoForm/ToDoForm";
 
 function AppUI() {
-  const { filteredToDos, toggleToDoState, deleteToDo, loading, error, openModal, setOpenModal } =
+  const { filteredToDos, toggleToDoState, deleteToDo, loading, error, openModal } =
     React.useContext(ToDoContext);
 
   return (
