@@ -1,16 +1,20 @@
-import { ToDoContext } from '../ToDoContext/ToDoContext';
-import React from 'react';
-import './AddToDoButton.css';
+import { ToDoContext } from "../ToDoContext/ToDoContext";
+import { FaPlus } from "react-icons/fa";
+import React from "react";
+import "./AddToDoButton.css";
 
 function AddToDoButton() {
-    const { openModal, setOpenModal } = React.useContext(ToDoContext)
-return (
-    <button className='AddToDoButton' onClick={(event) => {
+  const { openModal, setOpenModal } = React.useContext(ToDoContext);
+  return (
+    <button
+      className="AddToDoButton"
+      onClick={(event) => {
         setOpenModal(!openModal);
-    }}>
-        <p>+</p>
+      }}
+    >
+      <FaPlus />
     </button>
-);
+  );
 }
 
-export { AddToDoButton }
+export { AddToDoButton };
