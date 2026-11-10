@@ -13,21 +13,30 @@ function useLocalStorage(itemName, initialValue) {
       try {
         const localStorageItems = localStorage.getItem(itemName);
         let parsedItems;
-  
+
         if (localStorageItems) {
           parsedItems = JSON.parse(localStorageItems);
-          setItem(parsedItems)
         } else {
-          localStorage.setItem(itemName, JSON.stringify(initialValue));
           parsedItems = initialValue;
         }
-        
-        setLoading(false);        
+
+        // Migración: asegurar que cada ToDo tenga un id estable.
+        // Esto permite editar/eliminar por id incluso con datos antiguos.
+        parsedItems = parsedItems.map((item) => ({
+          ...item,
+          id: item.id || crypto.randomUUID(),
+        }));
+
+        setItem(parsedItems);
+        localStorage.setItem(itemName, JSON.stringify(parsedItems));
+        setLoading(false);
       } catch(error) {
         setLoading(false);
         setError(true);
       }
     }, 1500)
+    // El efecto debe ejecutarse solo una vez al montar el hook.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Los corchetes aquí son de un array vacio, que indica que solo se ejecute una vez.
   // Si hubiera un estado que hiciera necesario actualizar el estado, puedes ponerlo dentro del array vacio.
   

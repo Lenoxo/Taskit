@@ -27,6 +27,13 @@
 .ToDoItem-p--completed {
     text-decoration: line-through;
 }
+.Icon-edit {
+    color: inherit;
+    font-size: 20px;
+}
+.Icon-edit:hover {
+    color: #64acff;
+}
 .Icon-delete {
     color: inherit;
     font-size: 20px;

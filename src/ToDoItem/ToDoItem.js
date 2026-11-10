@@ -3,6 +3,7 @@ import React from "react";
 // Esta es una forma especial de hacer imports, cambiando el nombre usando as.
 import { BsCheckCircle as CheckIcon } from "react-icons/bs";
 import { BsXCircle as DeleteIcon } from "react-icons/bs";
+import { BsPencilSquare as EditIcon } from "react-icons/bs";
 
 function ToDoItem(props) {
   return (
@@ -16,6 +17,9 @@ function ToDoItem(props) {
       <p className={`ToDoItem-p ${props.completed && "ToDoItem-p--completed"}`}>
         {props.text}
       </p>
+      <span className='Icon Icon-edit' onClick={props.onEdit}>
+        <EditIcon />
+      </span>
       <span className='Icon Icon-delete' onClick={props.deleteToDo}>
         <DeleteIcon />
       </span>

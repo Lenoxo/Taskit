@@ -30,6 +30,9 @@ function ToDoProvider({ children }) {
 
   const [openModal, setOpenModal] = React.useState(false);
 
+  // Guarda el ToDo que se está editando (null cuando se va a crear uno nuevo).
+  const [todoToEdit, setTodoToEdit] = React.useState(null);
+
   const completedToDos = toDos.filter((toDo) => !!toDo.completed).length;
   // Otra forma de hacer esto, es usando Boolean(toDo.completed)
   const totalToDos = toDos.length;
@@ -41,24 +44,35 @@ function ToDoProvider({ children }) {
     return toDoText.includes(toDoFilteredText);
   });
 
-  function toggleToDoState(index) {
-    const updatedToDos = [...toDos]; // Hacer una copia del array toDos
-    updatedToDos[index].completed = !updatedToDos[index].completed; // Cambiar el valor booleano
-    saveToDos(updatedToDos); // Actualizar el estado toDos con el array modificado
+  function toggleToDoState(id) {
+    // Se busca por id (no por índice) para que funcione correctamente con filtros.
+    const updatedToDos = toDos.map((toDo) =>
+      toDo.id === id ? { ...toDo, completed: !toDo.completed } : toDo
+    );
+    saveToDos(updatedToDos);
   }
 
-  function deleteToDo(index) {
-    const updatedToDos = [...toDos]; // Hacer una copia del array toDos
-    updatedToDos.splice(index, 1); // splice permite eliminar elementos de un array
-    saveToDos(updatedToDos); // Actualiza el estado ToDos
+  function deleteToDo(id) {
+    const updatedToDos = toDos.filter((toDo) => toDo.id !== id);
+    saveToDos(updatedToDos);
+  }
+
+  function editToDo(id, newText) {
+    const updatedToDos = toDos.map((toDo) =>
+      toDo.id === id ? { ...toDo, text: newText } : toDo
+    );
+    saveToDos(updatedToDos);
   }
 
   function addToDo(text) {
-    const updatedToDos = [...toDos]; // Hacer una copia del array toDos
-    updatedToDos.push({
-      text,
-      completed: false,
-    });
+    const updatedToDos = [
+      ...toDos,
+      {
+        id: crypto.randomUUID(),
+        text,
+        completed: false,
+      },
+    ];
     saveToDos(updatedToDos);
   }
 
@@ -72,11 +86,14 @@ function ToDoProvider({ children }) {
         filteredToDos,
         toggleToDoState,
         deleteToDo,
+        editToDo,
         loading,
         error,
         openModal,
         setOpenModal,
         addToDo,
+        todoToEdit,
+        setTodoToEdit,
       }}
     >
       {children}

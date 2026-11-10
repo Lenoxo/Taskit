@@ -12,13 +12,22 @@ import React from "react";
 import { ToDoForm } from "../ToDoForm/ToDoForm";
 
 function AppUI() {
-  const { filteredToDos, toggleToDoState, deleteToDo, loading, error, openModal, setOpenModal } =
-    React.useContext(ToDoContext);
+  const {
+    filteredToDos,
+    toggleToDoState,
+    deleteToDo,
+    loading,
+    error,
+    openModal,
+    setOpenModal,
+    setTodoToEdit,
+  } = React.useContext(ToDoContext);
 
   React.useEffect(() => {
     const handleKeyUp = (event) => {
       if (event.shiftKey && event.key === 'A') {
         console.info('A pressed!')
+        setTodoToEdit(null);
         setOpenModal(true);
       }
     };
@@ -28,7 +37,7 @@ function AppUI() {
     return () => {
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [setOpenModal]);
+  }, [setOpenModal, setTodoToEdit]);
 
   return (
     // Esta es una forma de renderizar estos elementos, la otra es usar un div para contener todo
@@ -42,20 +51,22 @@ function AppUI() {
         {!loading && filteredToDos.length === 0 && <EmptyToDos />}
 
         {filteredToDos.map((todo) => {
-          const todoIndex = filteredToDos.indexOf(todo);
           return (
             <ToDoItem
-              // A la hora de trabajar con arrays, es necesario que cada elemento tenga un valor único, y tiene que guardarse con el atributo key
-              // En este caso, uso el indice de la tarea de filteredToDos.
-              //
-              key={todoIndex}
+              // Cada ToDo tiene un id único y estable, lo que evita errores al
+              // editar o eliminar cuando hay un filtro de búsqueda activo.
+              key={todo.id}
               text={todo.text}
-              toggleToDoState={() => {
-                toggleToDoState(todoIndex);
-              }}
               completed={todo.completed}
+              toggleToDoState={() => {
+                toggleToDoState(todo.id);
+              }}
               deleteToDo={() => {
-                deleteToDo(todoIndex);
+                deleteToDo(todo.id);
+              }}
+              onEdit={() => {
+                setTodoToEdit(todo);
+                setOpenModal(true);
               }}
             />
           );
