@@ -12,8 +12,23 @@ import React from "react";
 import { ToDoForm } from "../ToDoForm/ToDoForm";
 
 function AppUI() {
-  const { filteredToDos, toggleToDoState, deleteToDo, loading, error, openModal } =
+  const { filteredToDos, toggleToDoState, deleteToDo, loading, error, openModal, setOpenModal } =
     React.useContext(ToDoContext);
+
+  React.useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.shiftKey && event.key === 'A') {
+        console.info('A pressed!')
+        setOpenModal(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [setOpenModal]);
 
   return (
     // Esta es una forma de renderizar estos elementos, la otra es usar un div para contener todo
@@ -32,6 +47,7 @@ function AppUI() {
             <ToDoItem
               // A la hora de trabajar con arrays, es necesario que cada elemento tenga un valor único, y tiene que guardarse con el atributo key
               // En este caso, uso el indice de la tarea de filteredToDos.
+              //
               key={todoIndex}
               text={todo.text}
               toggleToDoState={() => {
@@ -49,8 +65,8 @@ function AppUI() {
       <AddToDoButton />
       {openModal && (
         <Modal>
-        <ToDoForm />
-      </Modal>
+          <ToDoForm />
+        </Modal>
       )}
     </>
   );
