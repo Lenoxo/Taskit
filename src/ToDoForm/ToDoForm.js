@@ -22,7 +22,7 @@ function ToDoForm() {
       <textarea
         onChange={onChange}
         className="textarea"
-        placeholder="Llorar con la llorona"
+        placeholder="Escribe tu nueva tarea!"
         // Esto evita que se pueda añadir un ToDo vacio.
         required
       />
