@@ -16,17 +16,17 @@ function AppUI() {
     React.useContext(ToDoContext);
 
   React.useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyUp = (event) => {
       if (event.shiftKey && event.key === 'A') {
         console.info('A pressed!')
         setOpenModal(true);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
     };
   }, [setOpenModal]);
 

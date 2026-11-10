@@ -48,6 +48,7 @@ function ToDoForm() {
         placeholder="Escribe tu nueva tarea!"
         required
         value={newToDoValue}
+        autoFocus={true}
       />
       <div className="ToDoForm-buttonContainer">
         <button
