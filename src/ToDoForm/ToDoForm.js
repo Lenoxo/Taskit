@@ -4,27 +4,50 @@ import "./ToDoForm.css";
 
 function ToDoForm() {
   const { setOpenModal, addToDo } = React.useContext(ToDoContext);
-  const [newToDoValue, setNewToDoValue] = React.useState();
+  const [newToDoValue, setNewToDoValue] = React.useState("");
+
   const onSubmit = (event) => {
+    // Handle form submission - either by clicking the "Add" button or pressing Enter
     event.preventDefault();
-    addToDo(newToDoValue);
-    setOpenModal(false);
+
+    // Only add the task if there's text in the input field
+    if (newToDoValue.trim() !== "") {
+      addToDo(newToDoValue);
+      setOpenModal(false);
+    }
   };
+
   const onCancel = () => {
     setOpenModal(false);
   };
+
   const onChange = (event) => {
     setNewToDoValue(event.target.value);
   };
+
   return (
-    <form onSubmit={onSubmit}>
+    <form
+      onSubmit={onSubmit}
+      onKeyDown={(event) => {
+        // Handle Enter key press - create task when Enter is pressed and there's text in input
+        if (event.key === "Enter" && newToDoValue.trim() !== "") {
+          event.preventDefault();
+          onSubmit(event);
+        }
+        // Handle Escape key press - cancel the form when Escape is pressed
+        if (event.key === "Escape") {
+          event.preventDefault();
+          onCancel();
+        }
+      }}
+    >
       <label className="ToDoForm-label">Escribe tu nuevo ToDo</label>
       <textarea
         onChange={onChange}
         className="textarea"
         placeholder="Escribe tu nueva tarea!"
-        // Esto evita que se pueda añadir un ToDo vacio.
         required
+        value={newToDoValue}
       />
       <div className="ToDoForm-buttonContainer">
         <button
